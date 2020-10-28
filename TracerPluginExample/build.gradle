@@ -1,0 +1,32 @@
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.0'
+    }
+    repositories {
+        google()
+    }
+}
+
+plugins {
+    id 'example.tracerplugin' version '1.0.0'
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+repositories {
+    google()
+    jcenter()
+    maven {
+        url '../maven-repo'
+    }
+}
+
+dependencies {
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+}

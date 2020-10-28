@@ -1,0 +1,37 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+    id 'org.jetbrains.kotlin.jvm' version "$KOTLIN_VERSION"
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
+    implementation "org.jetbrains.kotlin:kotlin-compiler-embeddable:$KOTLIN_VERSION"
+}
+
+// For generate plugin marker artifact
+// groupId, artifactId, version, need to match TracerGradlePlugin.kt
+// artifactId = root project name 'TracerPlugin'
+group 'example' // groupId
+version '1.0.0' // version
+
+gradlePlugin {
+    plugins {
+        tracer {
+            id = 'example.tracerplugin' // gradle plugin id
+            implementationClass = 'example.TracerGradlePlugin'
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            url '../maven-repo'
+        }
+    }
+}
